@@ -1,13 +1,18 @@
 <template>
   <div id="body">
-    <router-view name="sidebar" class="sidebar"/>
-    <router-view name="content" class="content"/>
+    aaaa
+    <router-view id = "content" name="content" class="content"></router-view>
   </div>
 </template>
 
 <script>
   export default {
-    name: "HrView"
+    name: "HrView",
+    computed: {
+      key() {
+        return this.$route.path
+      }
+    },
   }
 </script>
 

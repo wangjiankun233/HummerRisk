@@ -41,12 +41,16 @@ import {removeToken} from "@/common/js/auth";
               if (response.data.success) {
                 removeToken();
                 localStorage.clear();
-                window.location.href = "/login";
+                this.$router.push({
+                  path: '/login',
+                }).catch(error => error);
               }
             }).catch(error => {
               console.log(error);
               localStorage.clear();
-              window.location.href = "/login";
+              this.$router.push({
+                path: '/login',
+              }).catch(error => error);
             });
             break;
           case "about":

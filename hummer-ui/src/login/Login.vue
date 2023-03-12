@@ -68,10 +68,12 @@ import { saveLocalStorage } from '@/common/js/utils';
 import { DEFAULT_LANGUAGE } from "@/common/js/constants";
 import { signinUrl, isLoginUrl, ssoSigninUrl, languageUrl, ssoLoginUrl } from "@/api/auth/auth";
 import { setToken } from '@/common/js/auth';
+import router from "@/business/components/common/router/router";
 
 /* eslint-disable */
   export default {
     name: "Login",
+
     data() {
       return {
         result: {},
@@ -95,14 +97,13 @@ import { setToken } from '@/common/js/auth';
       }
     },
     beforeCreate() {
-      this.$get(isLoginUrl).then(response => {
-        if (!response.data.success) {
-          this.ready = true;
-        } else {
-          let user = response.data.data;
-          saveLocalStorage(response.data);
-          this.getLanguage(user.language);
-          window.location.href = "/";
+     this.$get(isLoginUrl).then(response => {
+       if (!response.data.success) {
+         this.ready = true;
+       } else {
+          router.push({
+            path: '/dashboard/panel',
+          }).catch(error => error);
         }
       });
     },
@@ -146,7 +147,10 @@ import { setToken } from '@/common/js/auth';
           saveLocalStorage(response);
           sessionStorage.setItem('loginSuccess', 'true');
           setToken(response.data.token)
-          this.getLanguage(response.data.language);
+          this.$router.push({
+            path: '/',
+          }).catch(error => error);
+          //this.getLanguage(response.data.language);
         });
       },
       getLanguage(language) {
@@ -154,10 +158,14 @@ import { setToken } from '@/common/js/auth';
           this.$get(languageUrl, response => {
             language = response.data;
             localStorage.setItem(DEFAULT_LANGUAGE, language);
-            window.location.href = "/"
+            this.$router.push({
+              path: '/',
+            }).catch(error => error);
           })
         } else {
-          window.location.href = "/"
+          this.$router.push({
+            path: '/',
+          }).catch(error => error);
         }
       },
     }

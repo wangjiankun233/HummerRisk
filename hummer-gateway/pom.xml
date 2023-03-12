@@ -74,7 +74,7 @@
         <dependency>
             <groupId>com.hummerrisk</groupId>
             <artifactId>hummer-common-redis</artifactId>
-            <version>${hummerrisk.version}</version>
+            <version>1.0.0</version>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-webmvc</artifactId>

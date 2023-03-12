@@ -15,9 +15,10 @@
 import HeaderMenus from "./head/HeaderMenus";
 
 export default {
-    name: "dashboard",
+    name: "base",
     components: {HeaderMenus},
-    data() {
+
+  data() {
       return {
         baseUrl: "dashboard"
       }

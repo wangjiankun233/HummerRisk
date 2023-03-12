@@ -2,7 +2,7 @@ import {Message, MessageBox} from "element-ui";
 import axios from "axios";
 import {getToken, removeToken} from './auth';
 import i18n from "../../i18n/i18n";
-
+import router from "@/business/components/common/router/router";
 
 export default {
   install(Vue) {
@@ -21,14 +21,12 @@ export default {
     }
 
     let login = function () {
-      MessageBox.alert(i18n.t("commons.tips"), i18n.t("commons.prompt"), {
-        callback: () => {
-          axios.get("/auth/signout");
-          removeToken();
-          localStorage.clear();
-          window.location.href = "/login";
-        }
-      });
+    //  axios.get("/auth/signout");
+      //removeToken();
+     // localStorage.clear();
+      router.push({
+        path: '/login',
+      }).catch(error => error);
     };
 
     axios.defaults.withCredentials = true;
@@ -36,7 +34,9 @@ export default {
     if (token) axios.defaults.headers.common['Authorization'] = `Bearer `+ token;
     axios.defaults.baseURL = process.env.VUE_APP_BASE_API;
     axios.interceptors.response.use(response => {
-      if (response.headers["authentication-status"] === "invalid") {
+      console.log(response)
+      if (response.data.code === 401) {
+        //alert(1)
         login();
       }
       return response;
@@ -70,7 +70,9 @@ export default {
         return;
       }
       if (error.response && error.response.status === 403 && !unRedirectUrls.has(url)) {
-        window.location.href = "/";
+        router.push({
+          path: '/',
+        }).catch(error => error);
         return;
       }
       result.loading = false;

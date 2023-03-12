@@ -45,15 +45,15 @@ module.exports = {
     }
   },
   pages: {
-    business: {
+    index: {
       entry: "src/business/main.js",
       template: "src/business/index.html",
       filename: "index.html"
     },
-    login: {
+    /*login: {
       entry: "src/login/login.js",
       template: "src/login/login.html",
       filename: "login.html"
-    }
+    }*/
   }
 };

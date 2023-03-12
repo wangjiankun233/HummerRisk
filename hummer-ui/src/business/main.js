@@ -37,6 +37,7 @@ Vue.use(VueCodemirror,  {
   options: { theme: "bespin", },
   events: ["scroll"]
 });
+console.log(111111)
 Vue.use(VueParticles);//登录页面的动态粒子背景
 Vue.config.productionTip = false;
 Vue.use(icon);

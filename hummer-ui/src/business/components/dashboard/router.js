@@ -1,10 +1,11 @@
 /* eslint-disable */
+import Base from "@/business/components/dashboard/base"
 export default {
   path: "/dashboard",
   name: "Dashboard",
   redirect: "/dashboard/dashboard",
   components: {
-    content: () => import(/* webpackChunkName: "setting" */ "@/business/components/dashboard/base")
+    content: Base
   },
   children: [
     {
